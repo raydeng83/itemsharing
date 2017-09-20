@@ -1,0 +1,14 @@
+server:
+  port: 8888
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/raydeng83/config-is-repo
+          username: raydeng83
+          password: Rochester24
+          search-paths: userservice, itemservice
+
+        encrypt:
+          enabled: false
