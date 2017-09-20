@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 public class SecurityConfig extends ResourceServerConfigurerAdapter {
 
     private static final String[] PUBLIC_MATCHERS = {
-            "/v1/user/**"
+//            "/v1/user/**"
 //            "/v1/user"
     };
 

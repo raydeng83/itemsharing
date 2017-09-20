@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -22,6 +23,7 @@ import java.util.Set;
 @EnableEurekaClient
 @EnableFeignClients
 @EnableCircuitBreaker
+@EnableResourceServer
 public class ItemserviceApplication implements CommandLineRunner{
 
 	@Autowired
@@ -47,7 +49,7 @@ public class ItemserviceApplication implements CommandLineRunner{
 		item.setUser(user);
 
 		itemService.addItemByUser(item, user.getUsername());
-
+		item.setId(null);
 		item.setName("Item2");
 		item.setItemCondition("Used");
 		item.setStatus("Inactive");
