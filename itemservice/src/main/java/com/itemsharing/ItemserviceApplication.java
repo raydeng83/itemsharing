@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @SpringBootApplication
+@EnableEurekaClient
 public class ItemserviceApplication implements CommandLineRunner{
 
 	@Autowired
