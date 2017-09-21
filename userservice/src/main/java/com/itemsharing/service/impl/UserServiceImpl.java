@@ -1,5 +1,6 @@
 package com.itemsharing.service.impl;
 
+import com.itemsharing.event.SimpleSourceBean;
 import com.itemsharing.model.Role;
 import com.itemsharing.model.User;
 import com.itemsharing.model.UserRole;
@@ -25,6 +26,9 @@ public class UserServiceImpl implements UserService{
     private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
+    private SimpleSourceBean simpleSourceBean;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -43,6 +47,8 @@ public class UserServiceImpl implements UserService{
     public User createUser(User user) {
         User localUser = userRepository.findByUsername(user.getUsername());
 
+        simpleSourceBean.publishUserChange("CREATE", user.getUsername());
+
         if(localUser != null) {
             LOG.info("User with username {} already exist. Nothing will be done. ", user.getUsername());
         } else {
@@ -59,6 +65,7 @@ public class UserServiceImpl implements UserService{
             String encryptedPassword = SecurityUtility.passwordEncoder().encode(user.getPassword());
             user.setPassword(encryptedPassword);
             localUser = userRepository.save(user);
+
 
 //            simpleSourceBean.publishUserChange("CREATE", localUser.getUsername());
 
@@ -87,6 +94,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getUserByUsername(String username) {
+//        simpleSourceBean.publishUserChange("FIND_USER_BY_USERNAME", username);
+
         return userRepository.findByUsername(username);
     }
 }

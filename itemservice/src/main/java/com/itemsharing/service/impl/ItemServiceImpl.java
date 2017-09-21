@@ -1,5 +1,6 @@
 package com.itemsharing.service.impl;
 
+import com.itemsharing.client.UserRestTemplateClient;
 import com.itemsharing.model.Item;
 import com.itemsharing.model.User;
 import com.itemsharing.repository.ItemRepository;
@@ -31,6 +32,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRestTemplateClient userRestTemplateClient;
 
     @Override
     public Item addItemByUser(Item item, String username) {
@@ -90,16 +94,19 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    @HystrixCommand(
-            fallbackMethod = "buildFallbackUser",
-            threadPoolKey = "itemByUserThreadPool",
-            threadPoolProperties = {@HystrixProperty(name="coreSize", value = "30"), @HystrixProperty(name="maxQueueSize", value = "10")},
-            commandProperties = {@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value="1000")}
-            )
+//    @HystrixCommand(
+//            fallbackMethod = "buildFallbackUser",
+//            threadPoolKey = "itemByUserThreadPool",
+//            threadPoolProperties = {@HystrixProperty(name="coreSize", value = "30"), @HystrixProperty(name="maxQueueSize", value = "10")},
+//            commandProperties = {@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value="10000")}
+//            )
     public User getUserByUsername(String username) {
 //        randomlyRunLong();
         LOG.debug("ItemService.getUserByUsername  Correlation id: {}", UserContextHolder.getContext().getCorrelationId());
-        return userService.findByUsername(username);
+//        User user = userService.findByUsername(username);
+        User user = userRestTemplateClient.getUser(username);
+
+        return user;
     }
 
     private void randomlyRunLong() {
