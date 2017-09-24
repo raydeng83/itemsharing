@@ -1,0 +1,5 @@
+  itemservice:
+    image: raydeng83/itemservice
+    mem_limit: 1073741824
+    ports:
+       - "8082:8082"

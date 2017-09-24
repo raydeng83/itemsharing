@@ -1,0 +1,5 @@
+  userservice:
+    image: raydeng83/userservice
+    mem_limit: 1073741824
+    ports:
+       - "8081:8081"

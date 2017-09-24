@@ -1,0 +1,5 @@
+  authenticationservice:
+    image: raydeng83/authenticationservice
+    mem_limit: 1073741824
+    ports:
+       - "8901:8901"

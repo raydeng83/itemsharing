@@ -1,0 +1,5 @@
+  zuulservice:
+    image: raydeng83/zuulservice
+    mem_limit: 1073741824
+    ports:
+       - "5555:5555"

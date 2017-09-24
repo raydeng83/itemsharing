@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: zuulservice
+  profiles:
+    active:
+      default
+  cloud:
+    config:
+      uri:
+        http://52.87.220.41:8888
