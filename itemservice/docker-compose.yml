@@ -3,3 +3,6 @@
     mem_limit: 1073741824
     ports:
        - "8082:8082"
+    environment:
+      ENCRYPT_KEY: "IMSYMMETRIC"
+      CONFIGSERVER_URI: "http://configservice:8888"

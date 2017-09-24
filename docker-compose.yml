@@ -1,0 +1,49 @@
+  configservice:
+      image: raydeng83/configservice
+      mem_limit: 1000000000
+      ports:
+        - "8888:8888"
+      environment:
+        ENCRYPT_KEY: "IMSYMMETRIC"
+
+  eurekaservice:
+    image: raydeng83/eurekaservice
+    mem_limit: 1073741824
+    ports:
+      - "8761:8761"
+
+  zuulservice:
+    image: raydeng83/zuulservice
+    mem_limit: 1073741824
+    ports:
+      - "5555:5555"
+    environment:
+      CONFIGSERVER_URI: "http://configservice:8888"
+
+  authenticationservice:
+    image: raydeng83/authenticationservice
+    mem_limit: 1073741824
+    ports:
+       - "8901:8901"
+    environment:
+      ENCRYPT_KEY: "IMSYMMETRIC"
+      CONFIGSERVER_URI: "http://configservice:8888"
+
+  userservice:
+    image: raydeng83/userservice
+    mem_limit: 1073741824
+    ports:
+      - "8081:8081"
+    environment:
+      ENCRYPT_KEY: "IMSYMMETRIC"
+      CONFIGSERVER_URI: "http://configservice:8888"
+
+  itemservice:
+    image: raydeng83/itemservice
+    mem_limit: 1073741824
+    ports:
+      - "8082:8082"
+    environment:
+      ENCRYPT_KEY: "IMSYMMETRIC"
+      CONFIGSERVER_URI: "http://configservice:8888"
+
