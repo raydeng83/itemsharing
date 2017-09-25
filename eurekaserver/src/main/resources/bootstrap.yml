@@ -1,9 +1,9 @@
-spring:
-  application:
-    name: eurekaservice
-  profiles:
-    active:
-      default
-  cloud:
-    config:
-      enabled: true
+#spring:
+#  application:
+#    name: eurekaservice
+#  profiles:
+#    active:
+#      default
+#  cloud:
+#    config:
+#      enabled: true
